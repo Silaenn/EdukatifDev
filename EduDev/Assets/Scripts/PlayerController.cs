@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 5f;
-    private float jump = 8f;
-    private bool moveLeft = false;
-    private bool moveRight = false;
+    private float jump = 10f;
     private bool moveUp = false;
-    bool isGrounded = true;
+    private int item1 = 0, item2 = 0, item3 = 0, max = 10;
+
+    public Text item1UI, item2UI, item3UI;
+    private bool isGrounded = true;
     private Rigidbody2D rb;
 
     void Start()
@@ -19,21 +20,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (moveLeft)
-        {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
-            transform.eulerAngles = Vector2.up * 180;
-        }
-        else if (moveRight)
-        {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
-            transform.eulerAngles = Vector2.zero;
-        } 
-        else
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
-
         if(moveUp && isGrounded){
             rb.velocity = new Vector2(rb.velocity.x, jump);
             moveUp = false;
@@ -41,25 +27,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void MoveLeft()
-    {
-        moveLeft = true;
-    }
-
-    public void StopMovingLeft()
-    {
-        moveLeft = false;
-    }
-
-    public void MoveRight()
-    {
-        moveRight = true;
-    }
-
-    public void StopMovingRight()
-    {
-        moveRight = false;
-    }
 
       public void MoveUp()
     {
@@ -74,4 +41,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+   private void OnTriggerEnter2D(Collider2D other) {
+    if(other.CompareTag("Item1")){
+        AddItem1();
+         other.gameObject.SetActive(false); 
+    }
+    else if(other.CompareTag("Item2")){
+        AddItem2();
+         other.gameObject.SetActive(false); 
+    }
+    else if(other.CompareTag("Item3")){
+        AddItem3();
+         other.gameObject.SetActive(false); 
+    }
+}
+     void AddItem1(){
+        if(item1 < 10){
+        item1++;
+        item1UI.text = item1.ToString() + " / " + max;
+        } 
+    }
+     void AddItem2(){
+        if(item2 < 10){
+        item2++;
+        item2UI.text = item2.ToString() + " / " + max;
+        } 
+    }
+     void AddItem3(){
+        if(item3 < 10){
+        item3++;
+        item3UI.text = item3.ToString() + " / " + max;
+        } 
+    }
 }
