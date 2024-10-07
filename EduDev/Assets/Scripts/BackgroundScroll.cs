@@ -25,6 +25,7 @@ public class BackgroundScroll : MonoBehaviour
             if (spriteRenderer != null)
             {
                 backgroundWidths[i] = spriteRenderer.bounds.size.x;
+                Debug.Log(backgroundWidths[i]);
             }
             else
             {
@@ -40,18 +41,23 @@ public class BackgroundScroll : MonoBehaviour
         {
             backgrounds[i].transform.Translate(Vector3.left * backgroundSpeed * Time.deltaTime);
 
-            if (backgrounds[i].transform.position.x <= -backgroundWidths[i])
-            {
-                RepositionBackground(i);
+           if (Mathf.Floor(backgrounds[i].transform.position.x) <= -backgroundWidths[i])
+        {
+            RepositionBackground(i);
+        }
 
-            }
         }
     }
 
-    private void RepositionBackground(int index)
-    {
-        int nextIndex = (index + 1) % backgrounds.Length;
-        float newX = backgrounds[nextIndex].transform.position.x + backgroundWidths[nextIndex];
-        backgrounds[index].transform.position = new Vector3(newX, startPositions[index].y, startPositions[index].z);
-    }
+  private void RepositionBackground(int index)
+{
+    int nextIndex = (index + 1) % backgrounds.Length;
+
+    // Tambahkan buffer kecil untuk menghindari celah
+    float buffer = 0.10f; // Coba dengan nilai kecil seperti 0.01 atau lebih kecil
+    float newX = backgrounds[nextIndex].transform.position.x + backgroundWidths[nextIndex] - buffer;
+
+    backgrounds[index].transform.position = new Vector3(newX, startPositions[index].y, startPositions[index].z);
+}
+
 }
