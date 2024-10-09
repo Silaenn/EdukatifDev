@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private float jump = 8f;
+    private float jump = 14f;
     private bool moveUp = false;
-    public int item1 = 0, item2 = 0, item3 = 0, item4 = 0, max = 10;
+    public int item1 = 0, item2 = 0, item3 = 0, item4 = 0, item5 = 0, max = 10;
 
-    public Text item1UI, item2UI, item3UI, item4UI;
+    public Text item1UI, item2UI, item3UI, item4UI, item5UI;
     private bool isGrounded = true;
     private Rigidbody2D rb;
 
@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private bool shouldChangeScene = false;
     public BackgroundScroll backgroundScroll;
      public string SceneEndingType { get; private set; }
+     public string currentJumpAnimation = "Jump";
+     public AudioClip jumpSound;
 
     void Start()
     {
@@ -34,7 +36,8 @@ public class PlayerController : MonoBehaviour
     {
         if(moveUp && isGrounded){
             rb.velocity = new Vector2(rb.velocity.x, jump);
-            anim.SetTrigger("Jump");
+            anim.SetTrigger(currentJumpAnimation);
+            PlayJumpSound();
             moveUp = false;
             isGrounded = false;
         }
@@ -76,6 +79,11 @@ public class PlayerController : MonoBehaviour
         PlaySound();
          other.gameObject.SetActive(false); 
     }
+    else if(other.CompareTag("Item5")){
+        AddItem5();
+        PlaySound();
+         other.gameObject.SetActive(false); 
+    }
 
     
 }
@@ -103,7 +111,14 @@ public class PlayerController : MonoBehaviour
      void AddItem4(){
         if(item4 < max){
         item4++;
-        item4UI.text = item3.ToString() + " / " + max;
+        item4UI.text = item4.ToString() + " / " + max;
+        CheckIfBuff();
+        } 
+    }
+     void AddItem5(){
+        if(item5 < max){
+        item5++;
+        item5UI.text = item5.ToString() + " / " + max;
         CheckIfBuff();
         } 
     }
@@ -113,13 +128,22 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(pickupSound);  // Mainkan suara sekali
     }
 
+    private void PlayJumpSound()
+    {
+        audioSource.PlayOneShot(jumpSound);  // Mainkan suara lompat sekali
+    }
+
     void CheckIfBuff(){
-        if(item2 >= 8 && item2 <= max){
+        if((item2 >= 8 && item2 <= max) || (item5 >= 8 && item5 <= max)){
             shouldChangeScene = true;
             SceneEndingType = "SadEnding";
         }
+        else if((item1 == max) || (item3 == max)  || (item4 == max)){
+            shouldChangeScene = true;
+            SceneEndingType = "NetralEnding";
+        }
 
-        if((item1 >= 5 && item1 <= max) || (item3 >= 5 && item3 <= max) || (item4 >= 5 && item4 == max)){
+        else if((item1 >= 5 && item1 <= max) || (item3 >= 5 && item3 <= max) || (item4 >= 5 && item4 <= max)){
             shouldChangeScene = true;
             SceneEndingType = "CutScene";
         }

@@ -13,7 +13,7 @@ public class TypeWriterEffect : MonoBehaviour
     private void Start()
     {
         // Misalnya teks penuh yang ingin ditampilkan
-        fullText = "Dia menjadi seseorang yang suka menolong sesama \n Dia menjadi seseorang yang bisa bekerja bersama \n Dia menjadi seseorang yang mau mendengarkan pendapat orang lain, \n Dan dia menjadi seseorang yang adil dan tidak membeda-bedakan sesama";
+        fullText = "Meskipun Sadewa mampu mempelajari ilmu-ilmu Pancasila dengan baik, \n dia mengalami kesulitan dalam mengamalkan prinsip-prinsip tersebut dalam kehidupan sehari-hari. \n Akibatnya, nilai-nilai Pancasila tidak tercermin dalam sikap dan perilakunya.";
         
         // Mulai coroutine untuk menampilkan teks
         StartCoroutine(ShowText());

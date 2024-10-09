@@ -6,17 +6,14 @@ using UnityEngine.SceneManagement;
 public class BackgroundScroll : MonoBehaviour
 {
     [SerializeField] private GameObject[] backgrounds;
-    [SerializeField] private float backgroundSpeed = 5f;
+    [SerializeField] private float backgroundSpeed = 3f;
     private Vector3[] startPositions;
     private float[] backgroundWidths;
     private bool isScrolling = true;  // Flag untuk menghentikan scrolling saat background selesai
 
     private PlayerController playerController;  
-
-    [SerializeField] private Sprite[] newPlayerSkin;
     
     [SerializeField] private string[] newPlayerAnimationTrigger;
-    private bool isFirstAnimation = true; // Untuk menentukan animasi mana yang aktif
 
     private void Start()
     {
@@ -59,59 +56,46 @@ public class BackgroundScroll : MonoBehaviour
                         StopScrolling();
                     }
                 }
+
+                 if (i == 4 && backgrounds[i].transform.position.x <= 0)
+                {
+                    ChangePlayerAnimation("SmaWalk");  
+                     if (playerController != null)
+                 {
+                    playerController.currentJumpAnimation = "SmaJump";  // Ganti animasi jump menjadi SmaJump
+                 }
+                }
+
+                // Cek apakah background ke-10 sudah mencapai posisi tertentu (misal: X <= 0)
+                if (i == 9 && backgrounds[i].transform.position.x <= 0)
+                {
+                    ChangePlayerAnimation("Kerja");  
+                    playerController.currentJumpAnimation = "KerjaJump";
+                }
             }
         }
 
         // Mengecek apakah semua item telah dikumpulkan
         if (playerController != null && !isScrolling)
         {
-            CheckEnding();
+            ChoiceAction choiceAction = FindObjectOfType<ChoiceAction>();
+            if(choiceAction != null && !choiceAction.isIndialogue){
+                CheckEnding();
+            }
         }
     }
 
-     private void OnTriggerEnter2D(Collider2D other)
-{
-    Debug.Log("Entered trigger with: " + other.gameObject.name);
-
-    if (other.CompareTag("Player"))
+    private void ChangePlayerAnimation(string animationTrigger)
     {
-        Debug.Log("It's the player, changing animation...");
-        ChangePlayerSkinAndAnimation(other.gameObject);
-    }
-}
-
-   private void ChangePlayerSkinAndAnimation(GameObject player)
-{
-    Animator playerAnimator = player.GetComponent<Animator>();
-    Debug.Log("Masuk");
-
-    // Ganti skin jika perlu
-    if (player != null && newPlayerSkin.Length > 0)
-    {
-        SpriteRenderer playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
-        if (playerSpriteRenderer != null)
+        if (playerController != null)
         {
-            playerSpriteRenderer.sprite = newPlayerSkin[0];  // Skin tetap bisa diganti jika ada
+            Animator playerAnimator = playerController.GetComponent<Animator>();
+            if (playerAnimator != null)
+            {
+                playerAnimator.SetTrigger(animationTrigger);  // Aktifkan animasi berdasarkan trigger yang diberikan
+            }
         }
     }
-
-    // Ganti animasi dengan trigger
-    if (playerAnimator != null)
-    {
-        if (isFirstAnimation)
-        {
-            // Panggil trigger untuk animasi pertama
-            playerAnimator.SetTrigger("Sma");
-        }
-        else
-        {
-            // Panggil trigger untuk animasi kedua
-            playerAnimator.SetTrigger("Kerja");
-        }
-        isFirstAnimation = !isFirstAnimation; // Tukar antara animasi 1 dan 2
-        Debug.Log("Keluar");
-    }
-}
 
     // Fungsi untuk menghentikan scrolling
     public void StopScrolling()
@@ -133,7 +117,9 @@ public class BackgroundScroll : MonoBehaviour
                 SceneManager.LoadScene("SadEnding");
             } else if(playerController.SceneEndingType == "CutScene"){
                 SceneManager.LoadScene("CutScene");
-            }           
+            } else if(playerController.SceneEndingType == "NetralEnding")       {
+                SceneManager.LoadScene("NetralEnding");
+            }
         }
     }
 }

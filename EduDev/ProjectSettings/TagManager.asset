@@ -10,6 +10,7 @@ TagManager:
   - Item3
   - Npc
   - Item4
+  - Item5
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: menu
+    uniqueID: 3220249603
+    locked: 0
   - name: Background
     uniqueID: 2456212467
     locked: 0
@@ -58,9 +62,6 @@ TagManager:
     locked: 0
   - name: Pemisah
     uniqueID: 2702984197
-    locked: 0
-  - name: menu
-    uniqueID: 3220249603
     locked: 0
   - name: Default
     uniqueID: 0

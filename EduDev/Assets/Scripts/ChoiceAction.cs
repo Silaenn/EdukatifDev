@@ -10,6 +10,7 @@ public class ChoiceAction : MonoBehaviour
     public float interactionDistance = 6.0f; 
     private Animator playerAnimator;
     public BackgroundScroll backgroundScroll;
+    public bool isIndialogue = false;
 
     // Fungsi ini dipanggil saat tombol ditekan
     public void OnButtonClick()
@@ -31,6 +32,7 @@ public class ChoiceAction : MonoBehaviour
             backgroundScroll.StopScrolling(); 
              }
                 TriggerPlayerStopAnimation();
+                isIndialogue = true;
                 StartCoroutine(TalkToNPC(currentNpc));
                 return;
             }
@@ -60,6 +62,7 @@ public class ChoiceAction : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         ResetPlayerAnimation();
+        isIndialogue = false;
 
           if (backgroundScroll != null)
         {
