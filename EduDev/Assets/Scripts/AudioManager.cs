@@ -1,23 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
     private AudioSource audioSource;
-    public AudioClip[] clips;
+
     void Start()
     {
+        // Dapatkan komponen AudioSource
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = clips[0];
-        audioSource.loop = true;
-        if(!audioSource.isPlaying){
-            audioSource.Play();
+
+        // Periksa apakah AudioSource ada
+        if (audioSource != null)
+        {
+            // Jika audio belum dimainkan, mulai memainkannya
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            Debug.LogError("AudioSource tidak ditemukan pada GameObject ini.");
         }
     }
-
-   public void Buttonclick(){
-    audioSource.PlayOneShot(clips[1]);
-   }
 }

@@ -15,7 +15,7 @@ public class ItemSpawn : MonoBehaviour
 
 
    IEnumerator SpawnPipeCoroutine(){
-    yield return new WaitForSeconds(spawnTime);
+    yield return new WaitForSeconds(Random.Range(spawnTime - 1f, spawnTime + 1f));
     Instantiate(item, transform.position + Vector3.up * Random.Range(yPosMin, yPosMax), Quaternion.identity);
     StartCoroutine(SpawnPipeCoroutine());
    }

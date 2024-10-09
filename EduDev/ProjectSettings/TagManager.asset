@@ -8,6 +8,8 @@ TagManager:
   - Item1
   - Item2
   - Item3
+  - Npc
+  - Item4
   layers:
   - Default
   - TransparentFX
@@ -53,6 +55,12 @@ TagManager:
     locked: 0
   - name: character
     uniqueID: 3260119281
+    locked: 0
+  - name: Pemisah
+    uniqueID: 2702984197
+    locked: 0
+  - name: menu
+    uniqueID: 3220249603
     locked: 0
   - name: Default
     uniqueID: 0

@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 618652097}
   - component: {fileID: 618652096}
   - component: {fileID: 618652098}
+  - component: {fileID: 618652099}
   m_Layer: 0
   m_Name: StartGame
   m_TagString: Untagged
@@ -324,7 +325,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -6}
+  m_AnchoredPosition: {x: 0, y: 48}
   m_SizeDelta: {x: 625.49, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618652096
@@ -347,7 +348,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96b1c788b203e06489300ea13024020b, type: 2}
   m_sharedMaterial: {fileID: 2117284859306069873, guid: 96b1c788b203e06489300ea13024020b, type: 2}
@@ -356,7 +357,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -410,7 +411,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -26.144958, y: 0, z: -43.57483, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -445,6 +446,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &618652099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618652094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec28c11b0f4f2e940ab684014fc5a844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.05
+  textMeshPro: {fileID: 618652096}
 --- !u!1 &745922982
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &745922983
 RectTransform:
   m_ObjectHideFlags: 0
@@ -512,7 +527,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -822,12 +837,10 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -5046087913244507258, guid: 424e54a99435c434c853aeb113a58c39, type: 2}
+  - key: {fileID: -8705321127850513044, guid: 424e54a99435c434c853aeb113a58c39, type: 2}
     value: {fileID: 618652098}
-  - key: {fileID: -7725783228355747232, guid: 424e54a99435c434c853aeb113a58c39, type: 2}
-    value: {fileID: 745922986}
-  - key: {fileID: 4528889009685728665, guid: 424e54a99435c434c853aeb113a58c39, type: 2}
-    value: {fileID: 1270343575}
+  - key: {fileID: -4706487081114163548, guid: 424e54a99435c434c853aeb113a58c39, type: 2}
+    value: {fileID: 618652098}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1381943752
