@@ -21,6 +21,7 @@ public class Settings : MonoBehaviour
 
         if (isSettingsOpen)
         {
+            Time.timeScale = 0;  // Pause game setelah menekan setting
             settingsPanel.SetActive(true); // Aktifkan panel
             settingsPanel.transform.localScale = Vector3.zero; // Atur skala awal
             LeanTween.scale(settingsPanel, Vector3.one, 0.5f)
@@ -28,8 +29,9 @@ public class Settings : MonoBehaviour
                 .setIgnoreTimeScale(true) // Abaikan timeScale agar tetap berjalan
                 .setOnComplete(() =>
             {
+                
                 isAnimating = false; // Animasi selesai
-                Time.timeScale = 0;  // Pause game setelah animasi selesai
+                
             });
         }
         else
