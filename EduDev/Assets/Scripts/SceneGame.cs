@@ -37,4 +37,9 @@ public class SceneGame : MonoBehaviour
         Application.Quit();
     #endif
     }
+
+      public void SoundClick()
+    {
+        audioSource.PlayOneShot(buttonClickClip);
+    }
 }
