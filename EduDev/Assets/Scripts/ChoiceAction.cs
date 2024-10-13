@@ -11,70 +11,102 @@ public class ChoiceAction : MonoBehaviour
     private Animator playerAnimator;
     public BackgroundScroll backgroundScroll;
     public bool isIndialogue = false;
+    public string currentStopAnimation = "Stop"; 
+    private bool isInteracting = false;
 
-    // Fungsi ini dipanggil saat tombol ditekan
+    public DialogManager dialogManager; // Menghubungkan dengan DialogManager
+    
+
     public void OnButtonClick()
     {
-        if (playerAnimator == null){
+        if (isInteracting) return;
+
+        if (playerAnimator == null)
+        {
             playerAnimator = player.GetComponent<Animator>();
         }
-
         
         // Loop untuk mengecek jarak dengan setiap NPC
-        foreach (GameObject currentNpc in npc)
+        for (int i = 0; i < npc.Length; i++)
         {
+            GameObject currentNpc = npc[i];
             float distance = Vector3.Distance(player.transform.position, currentNpc.transform.position);
+
 
             if (distance < interactionDistance)
             {
-              if (backgroundScroll != null)
-             {
-            backgroundScroll.StopScrolling(); 
-             }
+                if (backgroundScroll != null)
+                {
+                    backgroundScroll.StopScrolling(); 
+                }
+
                 TriggerPlayerStopAnimation();
                 isIndialogue = true;
-                StartCoroutine(TalkToNPC(currentNpc));
+                isInteracting = true;
+                // Mulai dialog dengan NPC berdasarkan indeks
+                StartCoroutine(StartDialogueWithNPC(i)); // Mengirim indeks NPC ke dialogManager
                 return;
             }
             else
             {
-                Debug.Log("No interaction possible with " + currentNpc.name);
                 if (backgroundScroll != null)
-             {
-            backgroundScroll.StartScrolling(); 
-             }
+                {
+                    backgroundScroll.StartScrolling(); 
+                }
             }
         }
     }
 
     // Fungsi interaksi dengan NPC
-    IEnumerator TalkToNPC(GameObject npc)
+    IEnumerator StartDialogueWithNPC(int npcIndex)
     {
-        
-        Text npcText = npc.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>();
+        GameObject currentNpc = npc[npcIndex];
+        // Mengaktifkan dialog menggunakan DialogManager dengan NPC tertentu
+        if (dialogManager != null)
+        {
+            dialogManager.StartDialogue(npcIndex); // Panggil fungsi dari DialogManager dan kirimkan indeks NPC
+        }
 
-        if(npcText != null){
-            npcText.text = "Thank You";
+        // Tunggu sampai dialog selesai
+        while (dialogManager.isInDialogue)
+        {
+            yield return null; // Menunggu hingga dialog selesai
+        }
+
+        isInteracting = false;
+
+        Canvas npcCanvas = currentNpc.GetComponentInChildren<Canvas>();
+
+        if(npcCanvas != null){
+           Text npcText = npcCanvas.GetComponentInChildren<Text>();
+            if (npcText != null) {
+            npcText.text = "Thank You"; // Mengubah teks NPC
+         }
+        else
+        {
+        Debug.LogWarning("Text component not found in NPC!");
+        }
         } else{
             Debug.Log("No problem");
         }
 
-        yield return new WaitForSeconds(2f);
-
+        // Setelah dialog selesai
         ResetPlayerAnimation();
         isIndialogue = false;
 
-          if (backgroundScroll != null)
+        if (backgroundScroll != null)
         {
-            backgroundScroll.StartScrolling(); // Panggil fungsi untuk memulai penggulangan lagi
+            backgroundScroll.StartScrolling(); // Panggil fungsi untuk memulai penggulungan lagi
         }
     }
 
-     void TriggerPlayerStopAnimation()
+    // Fungsi untuk memicu animasi berhenti pada karakter pemain
+    void TriggerPlayerStopAnimation()
     {
         if (playerAnimator != null)
         {
-            playerAnimator.SetTrigger("Stop");  
+            playerAnimator.ResetTrigger(backgroundScroll.walk);
+            playerAnimator.SetTrigger(currentStopAnimation);  
         }
         else
         {
@@ -82,12 +114,13 @@ public class ChoiceAction : MonoBehaviour
         }
     }
 
-     void ResetPlayerAnimation()
+    // Fungsi untuk mengatur ulang animasi pemain setelah dialog selesai
+    void ResetPlayerAnimation()
     {
         if (playerAnimator != null)
         {
-            playerAnimator.ResetTrigger("Stop");  
-            playerAnimator.SetTrigger("Walk");  
+            playerAnimator.ResetTrigger(currentStopAnimation);  
+            playerAnimator.SetTrigger(backgroundScroll.walk);  
         }
     }
 }

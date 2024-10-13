@@ -14,9 +14,15 @@ public class BackgroundScroll : MonoBehaviour
     private PlayerController playerController;  
     
     [SerializeField] private string[] newPlayerAnimationTrigger;
+    private ChoiceAction choiceAction1;  
+
+    public string walk = "Walk";
+
 
     private void Start()
     {
+        walk = "Walk";
+
         int backgroundCount = backgrounds.Length;
         startPositions = new Vector3[backgroundCount];
         backgroundWidths = new float[backgroundCount];
@@ -37,6 +43,7 @@ public class BackgroundScroll : MonoBehaviour
         }
 
         playerController = FindObjectOfType<PlayerController>();  // Mendapatkan referensi ke ItemManager
+        choiceAction1 = FindObjectOfType<ChoiceAction>();
     }
 
     private void Update()
@@ -63,6 +70,7 @@ public class BackgroundScroll : MonoBehaviour
                      if (playerController != null)
                  {
                     playerController.currentJumpAnimation = "SmaJump";  // Ganti animasi jump menjadi SmaJump
+                    choiceAction1.currentStopAnimation = "StopSma";
                  }
                 }
 
@@ -71,6 +79,8 @@ public class BackgroundScroll : MonoBehaviour
                 {
                     ChangePlayerAnimation("Kerja");  
                     playerController.currentJumpAnimation = "KerjaJump";
+                    choiceAction1.currentStopAnimation = "StopKerja";
+                    
                 }
             }
         }
@@ -89,6 +99,7 @@ public class BackgroundScroll : MonoBehaviour
     {
         if (playerController != null)
         {
+            walk = animationTrigger;
             Animator playerAnimator = playerController.GetComponent<Animator>();
             if (playerAnimator != null)
             {
@@ -101,7 +112,6 @@ public class BackgroundScroll : MonoBehaviour
     public void StopScrolling()
     {
         isScrolling = false;  // Menghentikan pergerakan background
-        Debug.Log("Scrolling Stopped");
     }
 
     public void StartScrolling(){

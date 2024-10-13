@@ -126,8 +126,8 @@ TextureImporter:
       name: Karakter utama _0
       rect:
         serializedVersion: 2
-        x: 70
-        y: 1558
+        x: 82
+        y: 1551
         width: 365
         height: 437
       alignment: 0
@@ -252,10 +252,10 @@ TextureImporter:
       name: Karakter utama _6
       rect:
         serializedVersion: 2
-        x: 594
-        y: 1054
+        x: 606
+        y: 1075
         width: 372
-        height: 454
+        height: 353
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,12 +273,12 @@ TextureImporter:
       name: Karakter utama _7
       rect:
         serializedVersion: 2
-        x: 596
-        y: 1571
+        x: 600
+        y: 1580
         width: 372
-        height: 454
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 449
+      alignment: 9
+      pivot: {x: 0.4870123, y: 0.36658743}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
