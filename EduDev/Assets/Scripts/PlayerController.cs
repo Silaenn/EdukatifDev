@@ -138,14 +138,13 @@ public class PlayerController : MonoBehaviour
             shouldChangeScene = true;
             SceneEndingType = "SadEnding";
         }
-        else if((item1 == max) || (item3 == max)  || (item4 == max)){
-            shouldChangeScene = true;
-            SceneEndingType = "NetralEnding";
-        }
-
         else if((item1 >= 5 && item1 <= max) || (item3 >= 5 && item3 <= max) || (item4 >= 5 && item4 <= max)){
             shouldChangeScene = true;
             SceneEndingType = "CutScene";
+        }
+        else if((item1 == max) || (item3 == max)  || (item4 == max)){
+            shouldChangeScene = true;
+            SceneEndingType = "NetralEnding";
         }
     }
 

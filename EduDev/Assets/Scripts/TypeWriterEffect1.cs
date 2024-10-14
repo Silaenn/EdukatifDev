@@ -4,7 +4,7 @@ using TMPro;  // Import untuk TextMeshPro, jika menggunakan UI Text, ganti TMP_T
 
 public class TypeWriterEffect1 : MonoBehaviour
 {
-    [SerializeField] private float typingSpeed = 0.05f;  // Kecepatan pengetikan
+    [SerializeField] private float typingSpeed = 0.01f;  // Kecepatan pengetikan
     [SerializeField] private TMP_Text textMeshPro;       // Referensi ke TextMeshPro
 
     private string fullText;   // Teks penuh yang ingin ditampilkan
