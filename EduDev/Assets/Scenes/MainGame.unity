@@ -3546,7 +3546,7 @@ MonoBehaviour:
   - {fileID: 1547118521}
   - {fileID: 1081751062}
   - {fileID: 1737178676}
-  backgroundSpeed: 10
+  backgroundSpeed: 5
   newPlayerAnimationTrigger:
   - Sma
   - Kerja
