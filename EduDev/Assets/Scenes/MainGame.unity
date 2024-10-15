@@ -3546,7 +3546,7 @@ MonoBehaviour:
   - {fileID: 1547118521}
   - {fileID: 1081751062}
   - {fileID: 1737178676}
-  backgroundSpeed: 10
+  backgroundSpeed: 5
   newPlayerAnimationTrigger:
   - Sma
   - Kerja
@@ -4095,6 +4095,13 @@ MonoBehaviour:
   isIndialogue: 0
   currentStopAnimation: Stop
   dialogManager: {fileID: 502892996}
+  npcStatuses:
+  - npcObject: {fileID: 1440775396}
+    hasTalked: 0
+  - npcObject: {fileID: 1688583592}
+    hasTalked: 0
+  - npcObject: {fileID: 1051783627}
+    hasTalked: 0
 --- !u!4 &792397590
 Transform:
   m_ObjectHideFlags: 0
