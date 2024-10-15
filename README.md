@@ -1,5 +1,6 @@
 Platformer 2d Scrolling -JejakPancasila
 
-![Screenshot 2024-10-10 060223](https://github.com/user-attachments/assets/1d10e1f7-0a14-4fca-ac1f-14582788eb50)
+
+![Screenshot 2024-10-15 154510](https://github.com/user-attachments/assets/98af59a0-167f-487a-8633-ce44116c69fd)
 
 
