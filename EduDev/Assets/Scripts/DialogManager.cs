@@ -16,6 +16,7 @@ public class DialogManager : MonoBehaviour
     private Queue<string> npcDialogues; // Antrian dialog NPC
     private bool isMcTurn = true; // Menandakan giliran MC atau NPC
     public bool isInDialogue = false;
+    private bool isTyping = false; // Menandakan apakah sedang mengetik teks
 
     [System.Serializable]
     public struct Dialogue
@@ -65,30 +66,32 @@ public class DialogManager : MonoBehaviour
         isInDialogue = true;
 
         nextButton.onClick.RemoveAllListeners();
-
         nextButton.onClick.AddListener(DisplayNextSentence);
+        
         DisplayNextSentence();
     }
 
     void DisplayNextSentence()
     {
+        if (isTyping) return; // Jika sedang mengetik, abaikan klik
+
         if (mcDialogues.Count == 0 && npcDialogues.Count == 0)
         {
             EndDialogue();
             return;
         }
 
+        nextButton.interactable = false; // Nonaktifkan tombol selama mengetik
+
         if (isMcTurn && mcDialogues.Count > 0)
         {
             string sentence = mcDialogues.Dequeue();
-            StopAllCoroutines();
             StartCoroutine(TypeSentence(mcText, sentence));
             isMcTurn = false;
         }
         else if (!isMcTurn && npcDialogues.Count > 0)
         {
             string sentence = npcDialogues.Dequeue();
-            StopAllCoroutines();
             StartCoroutine(TypeSentence(npcText, sentence));
             isMcTurn = true;
         }
@@ -96,12 +99,15 @@ public class DialogManager : MonoBehaviour
 
     private IEnumerator TypeSentence(Text targetText, string sentence)
     {
+        isTyping = true;
         targetText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             targetText.text += letter;
             yield return null;
         }
+        isTyping = false;
+        nextButton.interactable = true; // Aktifkan kembali tombol setelah selesai mengetik
     }
 
     private void EndDialogue()
@@ -111,4 +117,3 @@ public class DialogManager : MonoBehaviour
         isInDialogue = false;
     }
 }
-
