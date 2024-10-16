@@ -27,4 +27,10 @@ Available for Android
 
 ![Screenshot 2024-10-15 154510](https://github.com/user-attachments/assets/98af59a0-167f-487a-8633-ce44116c69fd)
 
+![pancasila2](https://github.com/user-attachments/assets/d305071b-9d5c-4968-8f30-8338f31402fe)
+
+![pancasila3](https://github.com/user-attachments/assets/0bc1fbd1-1e43-4c9f-a449-b01fc6f1a586)
+
+![pancasila1](https://github.com/user-attachments/assets/04a52bce-1fcf-44b9-b0a9-55d090642236)
+
 
