@@ -24,6 +24,7 @@ Your journey through the portal will lead to an ending influenced by your decisi
 Platform:
 Available for Android
 
+![Desain tanpa judul (1)](https://github.com/user-attachments/assets/db237ecd-4b3c-442d-a91a-07a1ecc6e54b)
 
 ![Screenshot 2024-10-15 154510](https://github.com/user-attachments/assets/98af59a0-167f-487a-8633-ce44116c69fd)
 
